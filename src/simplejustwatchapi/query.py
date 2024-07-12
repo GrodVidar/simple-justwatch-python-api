@@ -270,7 +270,7 @@ class MediaEntry(NamedTuple):
 
 
 def prepare_search_request(
-    title: str, country: str, language: str, count: int, best_only: bool
+    title: str, packages: [str], country: str, language: str, count: int, best_only: bool
 ) -> dict:
     """Prepare search request for JustWatch GraphQL API.
     Creates a ``GetSearchTitles`` GraphQL query.
@@ -281,6 +281,7 @@ def prepare_search_request(
 
     Args:
         title: title to search
+        packages: the three-letter codes for streaming services
         country: country to search for offers
         language: language of responses
         count: how many responses should be returned
@@ -294,7 +295,10 @@ def prepare_search_request(
         "operationName": "GetSearchTitles",
         "variables": {
             "first": count,
-            "searchTitlesFilter": {"searchQuery": title},
+            "searchTitlesFilter": {
+                "searchQuery": title,
+                "packages": packages,
+            },
             "language": language,
             "country": country.upper(),
             "formatPoster": "JPG",

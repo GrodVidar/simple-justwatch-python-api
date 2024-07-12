@@ -17,7 +17,7 @@ _GRAPHQL_API_URL = "https://apis.justwatch.com/graphql"
 
 
 def search(
-    title: str, country: str = "US", language: str = "en", count: int = 4, best_only: bool = True
+    title: str, packages: [str], country: str = "US", language: str = "en", count: int = 4, best_only: bool = True
 ) -> list[MediaEntry]:
     """Search JustWatch for given title.
 
@@ -29,6 +29,7 @@ def search(
 
     Args:
         title: title to search
+        packages: the three-letter codes for streaming services
         country: country to search for offers, ``US`` by default
         language: language of responses, ``en`` by default
         count: how many responses should be returned
@@ -37,7 +38,7 @@ def search(
     Returns:
         List of ``MediaEntry`` NamedTuples parsed from JustWatch response
     """
-    request = prepare_search_request(title, country, language, count, best_only)
+    request = prepare_search_request(title, packages, country, language, count, best_only)
     response = post(_GRAPHQL_API_URL, json=request)
     response.raise_for_status()
     return parse_search_response(response.json())

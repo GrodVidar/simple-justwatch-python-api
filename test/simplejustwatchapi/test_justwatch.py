@@ -6,7 +6,7 @@ from simplejustwatchapi.justwatch import details, offers_for_countries, search
 
 JUSTWATCH_GRAPHQL_URL = "https://apis.justwatch.com/graphql"
 
-SEARCH_INPUT = ("TITLE", "COUNTRY", "LANGUAGE", 5, True)
+SEARCH_INPUT = ("TITLE", ["PACKAGES"], "COUNTRY", "LANGUAGE", 5, True)
 DETAILS_INPUT = ("NODE ID", "COUNTRY", "LANGUAGE", False)
 OFFERS_COUNTRIES_INPUT = {"COUNTRY1", "COUNTRY2", "COUNTRY3"}
 OFFERS_INPUT = ("NODE ID", OFFERS_COUNTRIES_INPUT, "LANGUAGE", True)
